@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
 import NoteForm from "./Pages/NoteForm";
+import ProtectedRoute from "./components/ProtectedRoute"; // import it
 
 const App = () => {
   const initialUserdata = {
@@ -39,36 +40,43 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
         <Route
           path="/"
           element={
-            <Home
-              searchInput={searchInput}
-              setSearchInput={setSearchInput}
-              notes={notes}
-              setNotes={setNotes}
-            />
+            <ProtectedRoute>
+              <Home
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                notes={notes}
+                setNotes={setNotes}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/create"
           element={
-            <NoteForm
-              userdata={userdata}
-              setUserdata={setUserdata}
-              addNote={addNote}
-            />
+            <ProtectedRoute>
+              <NoteForm
+                userdata={userdata}
+                setUserdata={setUserdata}
+                addNote={addNote}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/edit/:_id"
           element={
-            <NoteForm
-              userdata={userdata}
-              setUserdata={setUserdata}
-              editNote={editNote}
-              notes={notes}
-            />
+            <ProtectedRoute>
+              <NoteForm
+                userdata={userdata}
+                setUserdata={setUserdata}
+                editNote={editNote}
+                notes={notes}
+              />
+            </ProtectedRoute>
           }
         />
       </Routes>
